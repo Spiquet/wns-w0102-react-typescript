@@ -3,7 +3,18 @@ import React from "react";
 import blank_profile from "../blank-profile-picture-female.png";
 import Skill from "./Skill";
 
-const Wilder = ({ name, skills }) => {
+type SkillType = {
+  title: string;
+  voteCount: number;
+}
+type WilderType = {
+  name: string;
+  city: string;
+  skills: SkillType[];
+}
+
+
+const Wilder = ({ name, skills } : WilderType) : JSX.Element =>  {
   return (
     <article className="card">
       <img src={blank_profile} alt="Jane Doe Profile" />
@@ -16,7 +27,7 @@ const Wilder = ({ name, skills }) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        {skills.map((skill) => (
+        {skills.map((skill : SkillType) => (
           <Skill
             key={skill.title}
             title={skill.title}
