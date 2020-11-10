@@ -9,7 +9,7 @@ type SkillType = {
 }
 type WilderType = {
   name: string;
-  city: string;
+  city?: string;
   skills: SkillType[];
 }
 

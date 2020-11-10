@@ -7,9 +7,23 @@ import { Container } from "./components/Styled";
 import Wilder from "./components/Wilder";
 import CreateWilderForm from "./components/CreateWilderForm";
 
+type SkillType = {
+  title: string;
+  voteCount: number;
+}
+
+type WilderType = {
+  name: string;
+  city?: string;
+  skills: SkillType[];
+}
+
+
+
+
 function App() {
   const [loading, setLoading] = useState(true);
-  const [wilders, setWilders] = useState([]);
+  const [wilders, setWilders] = useState<WilderType[]>([]);
   const [
     shouldDisplayCreateWilderForm,
     setShouldDisplayCreateWilderForm,
@@ -31,7 +45,7 @@ function App() {
     fetchWilders();
   }, []);
 
-  const addNewWilder = (newWilder) => {
+  const addNewWilder = (newWilder : WilderType) : void => {
     setWilders([...wilders, newWilder]);
   };
 
@@ -60,7 +74,7 @@ function App() {
           <Loader type="Puff" color="#000" height={50} width={50} />
         ) : (
           <section className="card-row">
-            {wilders.map((wilder) => (
+            {wilders.map((wilder: WilderType) : JSX.Element  =>  (
               <Wilder
                 key={wilder.name}
                 name={wilder.name}
