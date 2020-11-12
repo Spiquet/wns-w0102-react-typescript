@@ -25,7 +25,7 @@ const Wilder = ({ name, skills }: WilderType): JSX.Element => {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        {skills.map((skill: SkillType) => (
+        {skills.map((skill) => (
           <Skill
             key={skill.title}
             title={skill.title}
