@@ -1,20 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import blank_profile from "../blank-profile-picture-female.png";
-import Skill from "./Skill";
+import blank_profile from '../blank-profile-picture-female.png';
+import Skill from './Skill';
 
 type SkillType = {
   title: string;
   voteCount: number;
-}
+};
 type WilderType = {
   name: string;
-  city?: string;
   skills: SkillType[];
-}
+};
 
-
-const Wilder = ({ name, skills } : WilderType) : JSX.Element =>  {
+const Wilder = ({ name, skills }: WilderType): JSX.Element => {
   return (
     <article className="card">
       <img src={blank_profile} alt="Jane Doe Profile" />
@@ -27,7 +25,7 @@ const Wilder = ({ name, skills } : WilderType) : JSX.Element =>  {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        {skills.map((skill : SkillType) => (
+        {skills.map((skill: SkillType) => (
           <Skill
             key={skill.title}
             title={skill.title}
