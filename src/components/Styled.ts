@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   max-width: 800px;
@@ -15,7 +15,7 @@ const VoteCount = styled.span`
 
   /* Colors */
   background-color: ${({ count }: { count: number }) =>
-    count >= 10 ? "rgba(0, 0, 0, 0.8)" : "rgba(0, 0, 0, 0.3)"};
+    count >= 10 ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)'};
   color: #fff;
 
   /* Rounded border */

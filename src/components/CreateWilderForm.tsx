@@ -1,39 +1,44 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Loader from "react-loader-spinner";
-
-type Skill = {
-  title: string;
-  voteCount: number;
-}
-
-type Wilder = {
-  name: string;
-  city: string;
-  skills: Skill[];
-}
+/* eslint-disable react/jsx-one-expression-per-line */
+import React, { useState } from 'react';
+import axios from 'axios';
+import Loader from 'react-loader-spinner';
+import { TWilder } from '../types';
 
 type FormSubmissionInfo = {
   status: 'success' | 'failure';
-  message: string
-} | null
+  message: string;
+} | null;
 
 const createWilder = async (name: string, city: string) => {
-  const response = await axios.post("/api/wilders", { name, city });
+  const response = await axios.post('/api/wilders', { name, city });
   return response.data.result;
 };
 
-const useCreateWilderForm = (onSuccess: (wilder: Wilder) => void): [string, (name: string) => void, string, (name: string) => void, boolean, FormSubmissionInfo, () => Promise<void>] => {
-  const [name, setName] = useState("");
-  const [city, setCity] = useState("");
+const useCreateWilderForm = (
+  onSuccess: (wilder: TWilder) => void,
+): [
+  string,
+  (name: string) => void,
+  string,
+  (name: string) => void,
+  boolean,
+  FormSubmissionInfo,
+  () => Promise<void>,
+] => {
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
-  const [formSubmissionInfo, setFormSubmissionInfo] = useState<FormSubmissionInfo>(null);
+  const [formSubmissionInfo, setFormSubmissionInfo] = useState<
+    FormSubmissionInfo
+  >(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const updateName = (name: string): void => {
     setFormSubmissionInfo(null);
     setName(name);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const updateCity = (city: string): void => {
     setFormSubmissionInfo(null);
     setCity(city);
@@ -43,17 +48,17 @@ const useCreateWilderForm = (onSuccess: (wilder: Wilder) => void): [string, (nam
     setLoading(true);
     try {
       const newWilder = await createWilder(name, city);
-      setName("");
-      setCity("");
+      setName('');
+      setCity('');
       setFormSubmissionInfo({
-        status: "success",
-        message: "Wilder created successfully.",
+        status: 'success',
+        message: 'Wilder created successfully.',
       });
       onSuccess(newWilder);
     } catch (error) {
       setFormSubmissionInfo({
-        status: "failure",
-        message: "Could not create wilder.",
+        status: 'failure',
+        message: 'Could not create wilder.',
       });
     } finally {
       setLoading(false);
@@ -72,10 +77,12 @@ const useCreateWilderForm = (onSuccess: (wilder: Wilder) => void): [string, (nam
 };
 
 type CreateWilderFormProps = {
-  onSuccess: (wilder: Wilder) => void
-}
+  onSuccess: (wilder: TWilder) => void;
+};
 
-const CreateWilderForm = ({ onSuccess }: CreateWilderFormProps): JSX.Element => {
+const CreateWilderForm = ({
+  onSuccess,
+}: CreateWilderFormProps): JSX.Element => {
   const [
     name,
     updateName,
@@ -94,13 +101,12 @@ const CreateWilderForm = ({ onSuccess }: CreateWilderFormProps): JSX.Element => 
       }}
     >
       <label htmlFor="wilder-name">
-        Name:{" "}
+        Name:{' '}
         <input
           id="wilder-name"
           type="text"
           name="wilder-name"
           value={name}
-          autoFocus
           onChange={(event) => {
             updateName(event.target.value);
           }}
@@ -108,7 +114,7 @@ const CreateWilderForm = ({ onSuccess }: CreateWilderFormProps): JSX.Element => 
       </label>
       <br />
       <label htmlFor="wilder-city">
-        City:{" "}
+        City:{' '}
         <input
           id="wilder-city"
           type="text"

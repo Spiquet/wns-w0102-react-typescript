@@ -1,13 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import VoteCount from "./VoteCount";
+import React from 'react';
+import PropTypes from 'prop-types';
+import VoteCount from './VoteCount';
+import { TSkill } from '../types';
 
-type SkillProps = {
-  title: string;
-  voteCount: number;
-}
-
-const Skill = ({ title, voteCount }: SkillProps): JSX.Element => (
+const Skill = ({ title, voteCount }: TSkill): JSX.Element => (
   <li>
     {title}
     <VoteCount count={voteCount} />

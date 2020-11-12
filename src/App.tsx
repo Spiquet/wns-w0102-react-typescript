@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Loader from "react-loader-spinner";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loader from 'react-loader-spinner';
+import './App.css';
+import { Container } from './components/Styled';
+import Wilder from './components/Wilder';
+import CreateWilderForm from './components/CreateWilderForm';
+import { TWilder } from './types';
 
-import "./App.css";
-import { Container } from "./components/Styled";
-import Wilder from "./components/Wilder";
-import CreateWilderForm from "./components/CreateWilderForm";
-
-function App() {
+function App(): JSX.Element {
   const [loading, setLoading] = useState(true);
-  const [wilders, setWilders] = useState([]);
+  const [wilders, setWilders] = useState<TWilder[]>([]);
   const [
     shouldDisplayCreateWilderForm,
     setShouldDisplayCreateWilderForm,
@@ -18,7 +18,8 @@ function App() {
   useEffect(() => {
     const fetchWilders = async () => {
       try {
-        const result = await axios("/api/wilders");
+        const result = await axios('/api/wilders');
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const { wilders } = result.data;
         setWilders(wilders);
       } catch (error) {
@@ -31,7 +32,7 @@ function App() {
     fetchWilders();
   }, []);
 
-  const addNewWilder = (newWilder) => {
+  const addNewWilder = (newWilder: TWilder): void => {
     setWilders([...wilders, newWilder]);
   };
 
@@ -47,12 +48,13 @@ function App() {
           <CreateWilderForm onSuccess={addNewWilder} />
         )}
         <button
+          type="button"
           onClick={() => {
             setShouldDisplayCreateWilderForm(!shouldDisplayCreateWilderForm);
           }}
         >
           {`${
-            shouldDisplayCreateWilderForm ? "Hide" : "Show"
+            shouldDisplayCreateWilderForm ? 'Hide' : 'Show'
           } create wilder form`}
         </button>
         <h2>Wilders</h2>
@@ -60,13 +62,15 @@ function App() {
           <Loader type="Puff" color="#000" height={50} width={50} />
         ) : (
           <section className="card-row">
-            {wilders.map((wilder) => (
-              <Wilder
-                key={wilder.name}
-                name={wilder.name}
-                skills={wilder.skills}
-              />
-            ))}
+            {wilders.map(
+              (wilder: TWilder): JSX.Element => (
+                <Wilder
+                  key={wilder.name}
+                  name={wilder.name}
+                  skills={wilder.skills}
+                />
+              ),
+            )}
           </section>
         )}
       </main>
