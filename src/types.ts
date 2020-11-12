@@ -1,10 +1,10 @@
-export type Skill = {
+export type TSkill = {
   title: string;
   voteCount: number;
 };
 
-export type Wilder = {
+export type TWilder = {
   name: string;
-  city: string;
-  skills: Skill[];
+  city?: string;
+  skills: TSkill[];
 };

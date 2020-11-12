@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
-
 import './App.css';
 import { Container } from './components/Styled';
 import Wilder from './components/Wilder';
 import CreateWilderForm from './components/CreateWilderForm';
-
-type SkillType = {
-  title: string;
-  voteCount: number;
-};
-
-type WilderType = {
-  name: string;
-  city?: string;
-  skills: SkillType[];
-};
+import { TWilder } from './types';
 
 function App(): JSX.Element {
   const [loading, setLoading] = useState(true);
-  const [wilders, setWilders] = useState<WilderType[]>([]);
+  const [wilders, setWilders] = useState<TWilder[]>([]);
   const [
     shouldDisplayCreateWilderForm,
     setShouldDisplayCreateWilderForm,
@@ -43,7 +32,7 @@ function App(): JSX.Element {
     fetchWilders();
   }, []);
 
-  const addNewWilder = (newWilder: WilderType): void => {
+  const addNewWilder = (newWilder: TWilder): void => {
     setWilders([...wilders, newWilder]);
   };
 
@@ -74,7 +63,7 @@ function App(): JSX.Element {
         ) : (
           <section className="card-row">
             {wilders.map(
-              (wilder: WilderType): JSX.Element => (
+              (wilder: TWilder): JSX.Element => (
                 <Wilder
                   key={wilder.name}
                   name={wilder.name}
